@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+  <title>GuideDog Robotics | App-Powered Guide Dog for the Visually Impaired</title>
+  <!-- Tailwind CSS v3 + Font Awesome 6 (free) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      background: #fefdf8;
+      overflow-x: hidden;
+      width: 100%;
+    }
+    .hero-gradient {
+      background: radial-gradient(circle at 20% 30%, #f5f0e7, #e8e2d4);
+    }
+    .card-hover {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card-hover:active {
+      transform: scale(0.98);
+    }
+    @media (min-width: 768px) {
+      .card-hover:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.15);
+      }
+      .card-hover:active {
+        transform: translateY(-6px);
+      }
+    }
+    .team-img-placeholder {
+      background: linear-gradient(135deg, #c0b7a8, #d6cdbc);
+    }
+    .border-soft {
+      border-color: #e7dfd1;
+    }
+    button, a {
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .container {
+      overflow-x: hidden;
+    }
+    img, svg, video {
+      max-width: 100%;
+      height: auto;
+    }
+    #mobile-menu {
+      transition: all 0.3s ease;
+    }
+    .btn-touch {
+      transition: transform 0.1s ease;
+    }
+    .btn-touch:active {
+      transform: scale(0.97);
+    }
+    /* App mockup styles */
+    .app-screen-mockup {
+      background: linear-gradient(145deg, #1a2a1f, #0f1a0e);
+      box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.35);
+    }
+    .voice-wave {
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; transform: scale(0.95); }
+      50% { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body class="font-sans antialiased text-gray-800">
+
+  <!-- ========== NAVIGATION - Mobile First ========== -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-soft">
+    <div class="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex flex-wrap items-center justify-between">
+      <div class="flex items-center space-x-2 sm:space-x-3">
+        <i class="fas fa-dog text-2xl sm:text-3xl text-amber-700"></i>
+        <span class="text-xl sm:text-2xl font-bold tracking-tight text-gray-800">Guide<span class="text-amber-700">Dog</span> Robotics</span>
+      </div>
+      <nav class="hidden md:flex space-x-6 lg:space-x-8 text-base lg:text-lg font-medium">
+        <a href="#home" class="hover:text-amber-700 transition">Home</a>
+        <a href="#mission" class="hover:text-amber-700 transition">Mission</a>
+        <a href="#technology" class="hover:text-amber-700 transition">Technology</a>
+        <a href="#app" class="hover:text-amber-700 transition">The App</a>
+        <a href="#team" class="hover:text-amber-700 transition">Team</a>
+        <a href="#competition" class="hover:text-amber-700 transition">Competition</a>
+      </nav>
+      <button id="mobile-menu-btn" class="md:hidden text-2xl focus:outline-none p-2 -mr-2" aria-label="Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-soft shadow-lg">
+      <div class="px-5 py-3 flex flex-col space-y-3 text-base font-medium">
+        <a href="#home" class="hover:text-amber-700 py-3 px-2 rounded-lg active:bg-amber-50 transition">🏠 Home</a>
+        <a href="#mission" class="hover:text-amber-700 py-3 px-2 rounded-lg active:bg-amber-50 transition">🎯 Mission</a>
+        <a href="#technology" class="hover:text-amber-700 py-3 px-2 rounded-lg active:bg-amber-50 transition">⚙️ Technology</a>
+        <a href="#app" class="hover:text-amber-700 py-3 px-2 rounded-lg active:bg-amber-50 transition">📱 The App</a>
+        <a href="#team" class="hover:text-amber-700 py-3 px-2 rounded-lg active:bg-amber-50 transition">👥 Team</a>
+        <a href="#competition" class="hover:text-amber-700 py-3 px-2 rounded-lg active:bg-amber-50 transition">🏆 Competition</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ========== HERO SECTION ========== -->
+    <section id="home" class="hero-gradient py-12 sm:py-16 md:py-24">
+      <div class="container mx-auto px-4 sm:px-6 flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12">
+        <div class="flex-1 text-center md:text-left">
+          <div class="inline-block bg-amber-100 text-amber-800 rounded-full px-3 py-1 sm:px-4 sm:py-1 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+            <i class="fas fa-microchip mr-1"></i> Robotic Competition 2025
+          </div>
+          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight text-gray-900">
+            A Robotic Dog That<br>
+            <span class="text-amber-700">Guides the Blind</span>
+          </h1>
+          <p class="text-base sm:text-lg md:text-xl text-gray-600 mt-4 sm:mt-6 max-w-2xl mx-auto md:mx-0">
+            Meet Atlas — the intelligent quadruped robot guided entirely through your smartphone. Set destinations, receive voice guidance, and navigate safely with our companion app.
+          </p>
+          <div class="mt-6 sm:mt-8 flex flex-wrap gap-3 sm:gap-4 justify-center md:justify-start">
+            <a href="#app" class="bg-gray-900 hover:bg-gray-800 text-white px-5 sm:px-7 py-2.5 sm:py-3 rounded-full font-semibold shadow-lg transition flex items-center gap-2 text-sm sm:text-base btn-touch"><i class="fas fa-mobile-alt"></i> Download App</a>
+            <a href="#technology" class="bg-white border border-gray-300 hover:border-amber-500 text-gray-800 px-5 sm:px-7 py-2.5 sm:py-3 rounded-full font-semibold shadow-sm transition flex items-center gap-2 text-sm sm:text-base btn-touch"><i class="fas fa-robot"></i> Explore Tech</a>
+          </div>
+        </div>
+        <div class="flex-1 flex justify-center">
+          <div class="relative w-full max-w-xs sm:max-w-sm md:max-w-md">
+            <div class="w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 bg-amber-200/40 rounded-full absolute -top-4 -left-4 blur-2xl -z-0"></div>
+            <div class="relative z-10 bg-white p-2 sm:p-3 rounded-2xl shadow-2xl">
+              <img src="https://placehold.co/800x600/2c3e2f/ffffff?text=GuideDog+Atlas" alt="Robotic dog guiding a person" class="rounded-xl w-full h-auto object-cover shadow-md">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== MISSION SECTION ========== -->
+    <section id="mission" class="py-12 sm:py-16 md:py-20 bg-white">
+      <div class="container mx-auto px-4 sm:px-6">
+        <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+          <i class="fas fa-bullseye text-3xl sm:text-4xl text-amber-600 mb-3"></i>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">Our Mission</h2>
+          <div class="w-20 h-1 bg-amber-500 mx-auto mt-3 mb-4 sm:mt-4 sm:mb-6 rounded-full"></div>
+          <p class="text-base sm:text-lg text-gray-600 px-2">
+            To engineer an affordable, reliable robotic guide dog that restores independence and mobility for the visually impaired community, powered entirely by a smartphone app for intuitive, modern control.
+          </p>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8">
+          <div class="bg-amber-50/40 p-5 sm:p-6 rounded-2xl border border-amber-100 text-center card-hover">
+            <div class="w-14 h-14 sm:w-16 sm:h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4"><i class="fas fa-eye text-xl sm:text-2xl text-amber-700"></i></div>
+            <h3 class="text-lg sm:text-xl font-bold">Vision Beyond Sight</h3>
+            <p class="text-gray-600 mt-2 text-sm sm:text-base">Real-time obstacle detection, curb recognition, and semantic mapping — all streamed to your phone via voice feedback.</p>
+          </div>
+          <div class="bg-amber-50/40 p-5 sm:p-6 rounded-2xl border border-amber-100 text-center card-hover">
+            <div class="w-14 h-14 sm:w-16 sm:h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4"><i class="fas fa-mobile-alt text-xl sm:text-2xl text-amber-700"></i></div>
+            <h3 class="text-lg sm:text-xl font-bold">App-Powered Control</h3>
+            <p class="text-gray-600 mt-2 text-sm sm:text-base">Voice commands, destination input, and real-time audio guidance through your smartphone — no physical feedback needed.</p>
+          </div>
+          <div class="bg-amber-50/40 p-5 sm:p-6 rounded-2xl border border-amber-100 text-center card-hover sm:col-span-2 lg:col-span-1">
+            <div class="w-14 h-14 sm:w-16 sm:h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4"><i class="fas fa-microchip text-xl sm:text-2xl text-amber-700"></i></div>
+            <h3 class="text-lg sm:text-xl font-bold">Autonomous Navigation</h3>
+            <p class="text-gray-600 mt-2 text-sm sm:text-base">LiDAR, depth cameras, and SLAM for indoor/outdoor wayfinding — simply set your destination in the app.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TECHNOLOGY SECTION ========== -->
+    <section id="technology" class="py-12 sm:py-16 md:py-20 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6">
+        <div class="text-center mb-10 sm:mb-14">
+          <i class="fas fa-cogs text-3xl sm:text-4xl text-amber-600 mb-3"></i>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">Cutting-Edge Technology</h2>
+          <p class="text-gray-500 max-w-2xl mx-auto mt-2 text-sm sm:text-base px-4">Powered by ROS2, edge AI, and seamless smartphone integration</p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-5 sm:gap-6 md:gap-8">
+          <div class="bg-white rounded-2xl shadow-md p-5 sm:p-6 w-full sm:w-72 md:w-80 border border-gray-100 card-hover">
+            <i class="fas fa-laptop-code text-2xl sm:text-3xl text-amber-600 mb-3"></i>
+            <h3 class="text-xl sm:text-2xl font-semibold">Sensor Fusion</h3>
+            <p class="text-gray-500 mt-2 text-sm sm:text-base">3D LiDAR + stereo vision + IMU. Detects obstacles up to 20m, classifies stairs, crosswalks, and dynamic objects.</p>
+          </div>
+          <div class="bg-white rounded-2xl shadow-md p-5 sm:p-6 w-full sm:w-72 md:w-80 border border-gray-100 card-hover">
+            <i class="fas fa-brain text-2xl sm:text-3xl text-amber-600 mb-3"></i>
+            <h3 class="text-xl sm:text-2xl font-semibold">Edge AI</h3>
+            <p class="text-gray-500 mt-2 text-sm sm:text-base">NVIDIA Jetson Orin runs YOLOv8 real-time detection & path planning. Voice recognition for destination commands via app.</p>
+          </div>
+          <div class="bg-white rounded-2xl shadow-md p-5 sm:p-6 w-full sm:w-72 md:w-80 border border-gray-100 card-hover">
+            <i class="fas fa-bluetooth text-2xl sm:text-3xl text-amber-600 mb-3"></i>
+            <h3 class="text-xl sm:text-2xl font-semibold">App Connectivity</h3>
+            <p class="text-gray-500 mt-2 text-sm sm:text-base">Low-latency BLE 5.0 + 5G connectivity. The app sends destinations and receives real-time voice guidance updates.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== THE APP SECTION - NO HAPTIC FEEDBACK, PURE APP CONTROL ========== -->
+    <section id="app" class="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-amber-50 to-white">
+      <div class="container mx-auto px-4 sm:px-6">
+        <div class="text-center mb-10 sm:mb-14">
+          <i class="fas fa-mobile-alt text-3xl sm:text-4xl text-amber-600 mb-3"></i>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">The GuideDog Companion App</h2>
+          <div class="w-20 h-1 bg-amber-500 mx-auto mt-3 mb-4 rounded-full"></div>
+          <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
+            Your complete control center — set destinations, receive voice guidance, and monitor your journey. No leash feedback needed. Just voice and sound.
+          </p>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
+          <!-- App Mockup -->
+          <div class="flex-1 flex justify-center">
+            <div class="app-screen-mockup rounded-[3rem] p-3 sm:p-4 bg-gradient-to-b from-gray-800 to-gray-900 shadow-2xl">
+              <div class="bg-white rounded-2xl overflow-hidden w-64 sm:w-72 md:w-80">
+                <div class="bg-amber-700 px-4 py-3 flex items-center justify-between">
+                  <i class="fas fa-dog text-white text-xl"></i>
+                  <span class="text-white font-semibold text-sm">GuideDog Atlas</span>
+                  <i class="fas fa-battery-full text-white text-sm"></i>
+                </div>
+                <div class="p-4 space-y-4">
+                  <div class="bg-amber-50 rounded-xl p-3">
+                    <p class="text-xs text-gray-500 mb-1">Current Status</p>
+                    <div class="flex items-center justify-between">
+                      <span class="text-green-600 font-semibold text-sm"><i class="fas fa-circle text-xs mr-1"></i> Connected</span>
+                      <span class="text-xs text-gray-500">Battery 87%</span>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <p class="text-xs text-gray-500 mb-2">Set Destination</p>
+                    <div class="flex gap-2">
+                      <input type="text" placeholder="Say or type destination..." class="flex-1 border border-gray-300 rounded-full px-3 py-2 text-sm focus:outline-none focus:border-amber-500">
+                      <button class="bg-amber-600 text-white px-4 py-2 rounded-full text-sm font-semibold btn-touch"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                  </div>
+
+                  <div class="bg-gray-100 rounded-xl p-3">
+                    <p class="text-xs text-gray-500 mb-2">Voice Assistant</p>
+                    <div class="flex items-center justify-center gap-2">
+                      <button class="bg-amber-600 text-white px-5 py-2 rounded-full text-sm font-semibold flex items-center gap-2 btn-touch">
+                        <i class="fas fa-microphone"></i> Tap to Speak
+                      </button>
+                      <div class="voice-wave flex gap-1">
+                        <div class="w-1 h-3 bg-amber-500 rounded-full animate-pulse"></div>
+                        <div class="w-1 h-5 bg-amber-500 rounded-full animate-pulse delay-75"></div>
+                        <div class="w-1 h-4 bg-amber-500 rounded-full animate-pulse delay-150"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="bg-amber-50 rounded-xl p-3">
+                    <p class="text-xs text-gray-500 mb-1">Last Voice Guidance</p>
+                    <p class="text-sm text-gray-700 italic">"Proceed straight for 20 meters. Crosswalk ahead."</p>
+                    <div class="flex justify-end mt-2">
+                      <i class="fas fa-volume-up text-amber-600 text-sm"></i>
+                    </div>
+                  </div>
+
+                  <div class="flex gap-2">
+                    <button class="flex-1 bg-gray-800 text-white py-2 rounded-full text-sm font-semibold btn-touch"><i class="fas fa-home mr-1"></i> Home</button>
+                    <button class="flex-1 bg-gray-800 text-white py-2 rounded-full text-sm font-semibold btn-touch"><i class="fas fa-stop-circle mr-1"></i> Emergency Stop</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- App Features -->
+          <div class="flex-1 space-y-5">
+            <div class="bg-white rounded-2xl p-5 shadow-md border-l-4 border-amber-500">
+              <div class="flex items-start gap-3">
+                <i class="fas fa-microphone-alt text-amber-600 text-2xl"></i>
+                <div>
+                  <h3 class="font-bold text-lg">Voice-Powered Commands</h3>
+                  <p class="text-gray-600 text-sm">Simply speak your destination or command — the app processes your voice and guides Atlas to navigate safely.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-white rounded-2xl p-5 shadow-md border-l-4 border-amber-500">
+              <div class="flex items-start gap-3">
+                <i class="fas fa-headphones-alt text-amber-600 text-2xl"></i>
+                <div>
+                  <h3 class="font-bold text-lg">Audio Guidance Only</h3>
+                  <p class="text-gray-600 text-sm">Clear, concise voice instructions delivered through your phone's speakers or connected headphones. No haptic feedback — just intuitive audio navigation.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-white rounded-2xl p-5 shadow-md border-l-4 border-amber-500">
+              <div class="flex items-start gap-3">
+                <i class="fas fa-map-marked-alt text-amber-600 text-2xl"></i>
+                <div>
+                  <h3 class="font-bold text-lg">Real-Time Journey Updates</h3>
+                  <p class="text-gray-600 text-sm">Live tracking of your route, obstacle alerts, and estimated arrival time — all displayed and announced through the app.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-white rounded-2xl p-5 shadow-md border-l-4 border-amber-500">
+              <div class="flex items-start gap-3">
+                <i class="fas fa-universal-access text-amber-600 text-2xl"></i>
+                <div>
+                  <h3 class="font-bold text-lg">Fully Accessible UI</h3>
+                  <p class="text-gray-600 text-sm">Designed with VoiceOver/TalkBack compatibility, high contrast, and large touch targets for effortless use by visually impaired users.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-amber-100 rounded-2xl p-4 text-center">
+              <p class="text-amber-800 font-semibold text-sm"><i class="fas fa-info-circle mr-1"></i> No leash haptics — everything is controlled through the app with voice and audio feedback.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TEAM SECTION ========== -->
+    <section id="team" class="py-12 sm:py-16 md:py-20 bg-white">
+      <div class="container mx-auto px-4 sm:px-6">
+        <div class="text-center mb-10 sm:mb-14">
+          <i class="fas fa-users text-3xl sm:text-4xl text-amber-600 mb-3"></i>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">Meet the Innovators</h2>
+          <p class="text-gray-500 max-w-2xl mx-auto mt-2 text-sm sm:text-base px-4">Driven by passion, engineering excellence, and social impact</p>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
+          <!-- Ometh Card -->
+          <div class="bg-gray-50 rounded-2xl overflow-hidden shadow-md card-hover text-center transition">
+            <div class="team-img-placeholder h-48 sm:h-56 flex items-center justify-center">
+              <i class="fas fa-user-astronaut text-5xl sm:text-7xl text-white/80"></i>
+            </div>
+            <div class="p-5 sm:p-6">
+              <h3 class="text-xl sm:text-2xl font-bold text-gray-800">Ometh</h3>
+              <p class="text-amber-600 font-medium text-sm sm:text-base">Lead Robotics Architect</p>
+              <p class="text-gray-500 text-xs sm:text-sm mt-3 sm:mt-4">Quadruped locomotion, inverse kinematics & embedded systems. Ometh designed the dynamic gait pattern for smooth guiding motion.</p>
+            </div>
+          </div>
+          <!-- Sineth Card -->
+          <div class="bg-gray-50 rounded-2xl overflow-hidden shadow-md card-hover text-center transition">
+            <div class="team-img-placeholder h-48 sm:h-56 flex items-center justify-center">
+              <i class="fas fa-microchip text-5xl sm:text-7xl text-white/80"></i>
+            </div>
+            <div class="p-5 sm:p-6">
+              <h3 class="text-xl sm:text-2xl font-bold text-gray-800">Sineth</h3>
+              <p class="text-amber-600 font-medium text-sm sm:text-base">AI & Perception Lead</p>
+              <p class="text-gray-500 text-xs sm:text-sm mt-3 sm:mt-4">Computer vision & deep learning specialist. Sineth trained object detection models for obstacles, traffic lights, and crosswalk signs.</p>
+            </div>
+          </div>
+          <!-- Nethika Card -->
+          <div class="bg-gray-50 rounded-2xl overflow-hidden shadow-md card-hover text-center transition sm:col-span-2 lg:col-span-1">
+            <div class="team-img-placeholder h-48 sm:h-56 flex items-center justify-center">
+              <i class="fas fa-mobile-alt text-5xl sm:text-7xl text-white/80"></i>
+            </div>
+            <div class="p-5 sm:p-6">
+              <h3 class="text-xl sm:text-2xl font-bold text-gray-800">Nethika</h3>
+              <p class="text-amber-600 font-medium text-sm sm:text-base">App & Voice Interface Designer</p>
+              <p class="text-gray-500 text-xs sm:text-sm mt-3 sm:mt-4">Mobile app development, voice UI, and accessibility expert. Nethika created the companion app with seamless voice-controlled navigation.</p>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-10 sm:mt-12 text-gray-500 italic text-sm sm:text-base">
+          <i class="fas fa-quote-left mr-2 text-amber-400"></i> United by innovation, we're redefining assistive robotics through smartphone integration.
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== COMPETITION SECTION ========== -->
+    <section id="competition" class="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-amber-50 to-white">
+      <div class="container mx-auto px-4 sm:px-6">
+        <div class="flex flex-col lg:flex-row gap-8 md:gap-12 items-stretch">
+          <div class="flex-1">
+            <div class="inline-block bg-amber-200 text-amber-800 rounded-full px-3 py-1 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+              <i class="fas fa-trophy mr-1"></i> RoboChallenge 2025
+            </div>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">Competition Milestones</h2>
+            <p class="text-gray-600 text-base sm:text-lg mt-3 sm:mt-4 leading-relaxed">
+              We're competing in the international <span class="font-semibold">"Assistive Robotics Grand Challenge"</span> — judged on app integration, navigation accuracy, user safety, and real-world adaptability.
+            </p>
+            <ul class="mt-5 sm:mt-6 space-y-2 sm:space-y-3">
+              <li class="flex items-start gap-2 sm:gap-3"><i class="fas fa-check-circle text-amber-600 mt-1 text-sm sm:text-base"></i> <span class="text-sm sm:text-base"><strong>App-controlled navigation:</strong> Voice destination setting & real-time guidance</span></li>
+              <li class="flex items-start gap-2 sm:gap-3"><i class="fas fa-check-circle text-amber-600 mt-1 text-sm sm:text-base"></i> <span class="text-sm sm:text-base"><strong>Obstacle course:</strong> Dynamic avoidance + staircase detection</span></li>
+              <li class="flex items-start gap-2 sm:gap-3"><i class="fas fa-check-circle text-amber-600 mt-1 text-sm sm:text-base"></i> <span class="text-sm sm:text-base"><strong>Guided navigation trial:</strong> Blindfolded user test through crowded city simulation using only app audio</span></li>
+              <li class="flex items-start gap-2 sm:gap-3"><i class="fas fa-check-circle text-amber-600 mt-1 text-sm sm:text-base"></i> <span class="text-sm sm:text-base"><strong>Technical presentation:</strong> Explaining app architecture, AI pipeline, and affordability</span></li>
+            </ul>
+            <div class="mt-6 sm:mt-8 flex flex-wrap gap-3 sm:gap-4">
+              <div class="bg-white rounded-xl px-4 py-2 sm:px-5 sm:py-3 shadow-sm border">
+                <span class="text-xl sm:text-2xl font-bold text-amber-800">#1</span>
+                <span class="ml-1 sm:ml-2 text-xs sm:text-sm text-gray-600">Regional Qualifier Winner</span>
+              </div>
+              <div class="bg-white rounded-xl px-4 py-2 sm:px-5 sm:py-3 shadow-sm border">
+                <span class="text-xl sm:text-2xl font-bold text-amber-800">$15k</span>
+                <span class="ml-1 sm:ml-2 text-xs sm:text-sm text-gray-600">Innovation Grant</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex-1 bg-white p-5 sm:p-6 rounded-2xl shadow-xl border border-amber-100">
+            <div class="flex items-center justify-between border-b pb-3 mb-4">
+              <h3 class="text-xl sm:text-2xl font-bold">Upcoming Events</h3>
+              <i class="fas fa-calendar-alt text-amber-600 text-lg sm:text-xl"></i>
+            </div>
+            <div class="space-y-3 sm:space-y-4">
+              <div class="flex justify-between items-center flex-wrap gap-2">
+                <div class="flex items-center"><i class="fas fa-chalkboard-user w-5 sm:w-6 text-amber-600"></i> <span class="ml-2 text-sm sm:text-base font-medium">Live Demo Day</span></div>
+                <span class="bg-amber-100 text-amber-800 px-2 py-1 sm:px-3 rounded-full text-xs sm:text-sm">May 12, 2025</span>
+              </div>
+              <div class="flex justify-between items-center flex-wrap gap-2">
+                <div class="flex items-center"><i class="fas fa-microphone-alt w-5 sm:w-6 text-amber-600"></i> <span class="ml-2 text-sm sm:text-base font-medium">Final Judging</span></div>
+                <span class="bg-amber-100 text-amber-800 px-2 py-1 sm:px-3 rounded-full text-xs sm:text-sm">June 2-4, 2025</span>
+              </div>
+              <div class="flex justify-between items-center flex-wrap gap-2">
+                <div class="flex items-center"><i class="fas fa-award w-5 sm:w-6 text-amber-600"></i> <span class="ml-2 text-sm sm:text-base font-medium">Awards Ceremony</span></div>
+                <span class="bg-amber-100 text-amber-800 px-2 py-1 sm:px-3 rounded-full text-xs sm:text-sm">June 10, 2025</span>
+              </div>
+            </div>
+            <div class="mt-6 sm:mt-8 bg-gray-50 rounded-xl p-4 text-center">
+              <p class="text-xs sm:text-sm text-gray-500">The GuideDog app is available for beta testing! <br> Contact us to be part of the trial.</p>
+              <button class="mt-2 sm:mt-3 text-amber-700 font-semibold inline-flex items-center gap-1 border border-amber-300 rounded-full px-3 py-1.5 sm:px-4 sm:py-1.5 text-sm hover:bg-amber-50 transition btn-touch">Request Beta Access <i class="fas fa-arrow-right"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="bg-gray-900 text-white pt-8 sm:pt-12 pb-4 sm:pb-6">
+      <div class="container mx-auto px-4 sm:px-6">
+        <div class="flex flex-col md:flex-row justify-between items-start gap-6 sm:gap-8 border-b border-gray-700 pb-6 sm:pb-8">
+          <div class="text-center md:text-left w-full md:w-auto">
+            <div class="flex items-center justify-center md:justify-start space-x-2 text-xl sm:text-2xl font-bold"><i class="fas fa-dog text-amber-400"></i><span>GuideDog Robotics</span></div>
+            <p class="text-gray-400 max-w-md mt-2 text-sm sm:text-base">Empowering independence through app-powered robotic companions.</p>
+          </div>
+          <div class="grid grid-cols-2 gap-6 sm:gap-8 w-full md:w-auto">
+            <div>
+              <h4 class="font-semibold text-base sm:text-lg">Explore</h4>
+              <ul class="mt-2 space-y-1 text-gray-400 text-sm sm:text-base">
+                <li><a href="#mission" class="hover:text-amber-400">Mission</a></li>
+                <li><a href="#technology" class="hover:text-amber-400">Technology</a></li>
+                <li><a href="#app" class="hover:text-amber-400">The App</a></li>
+                <li><a href="#team" class="hover:text-amber-400">Team</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold text-base sm:text-lg">Team Contact</h4>
+              <ul class="mt-2 space-y-1 text-gray-400 text-xs sm:text-sm break-all">
+                <li><i class="fas fa-envelope mr-2"></i> ometh@guidedog.ai</li>
+                <li><i class="fas fa-envelope mr-2"></i> sineth@guidedog.ai</li>
+                <li><i class="fas fa-envelope mr-2"></i> nethika@guidedog.ai</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="text-center text-gray-500 text-xs sm:text-sm mt-5 sm:mt-6">
+          &copy; 2025 GuideDog Robotics | Designed for Robotic Competition | Ometh · Sineth · Nethika
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Mobile menu toggle script -->
+  <script>
+    (function() {
+      const menuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          mobileMenu.classList.toggle('hidden');
+        });
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+          });
+        });
+        document.addEventListener('click', function(event) {
+          if (!mobileMenu.classList.contains('hidden') && !menuBtn.contains(event.target) && !mobileMenu.contains(event.target)) {
+            mobileMenu.classList.add('hidden');
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
+</html>
