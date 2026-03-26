@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+  <title>Jaga | The Alert Guardian - App-Powered Guide Robot</title>
+  <!-- Tailwind CSS v3 + Font Awesome 6 (free) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      background: #fefdf8;
+      overflow-x: hidden;
+      width: 100%;
+    }
+    .hero-gradient {
+      background: radial-gradient(circle at 20% 30%, #f5f0e7, #e8e2d4);
+    }
+    .card-hover {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card-hover:active {
+      transform: scale(0.98);
+    }
+    @media (min-width: 768px) {
+      .card-hover:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.15);
+      }
+    }
+    .team-img-placeholder {
+      background: linear-gradient(135deg, #c0b7a8, #d6cdbc);
+    }
+    .border-soft {
+      border-color: #e7dfd1;
+    }
+    button, a {
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .container {
+      overflow-x: hidden;
+    }
+    #mobile-menu {
+      transition: all 0.3s ease;
+    }
+    .btn-touch {
+      transition: transform 0.1s ease;
+    }
+    .btn-touch:active {
+      transform: scale(0.97);
+    }
+    .app-screen-mockup {
+      background: linear-gradient(145deg, #1a2a1f, #0f1a0e);
+      box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.35);
+    }
+    .voice-wave {
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; transform: scale(0.95); }
+      50% { opacity: 1; transform: scale(1); }
+    }
+    
+    /* Moving Elements Animations */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(3deg); }
+    }
+    @keyframes slowSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.05); }
+    }
+    @keyframes slideInLeft {
+      from { transform: translateX(-50px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideInRight {
+      from { transform: translateX(50px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes bounceSlow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    
+    .floating-element {
+      animation: float 4s ease-in-out infinite;
+    }
+    .slow-spin {
+      animation: slowSpin 20s linear infinite;
+    }
+    .pulse-glow {
+      animation: pulseGlow 2s ease-in-out infinite;
+    }
+    .slide-left {
+      animation: slideInLeft 0.8s ease-out;
+    }
+    .slide-right {
+      animation: slideInRight 0.8s ease-out;
+    }
+    .bounce-slow {
+      animation: bounceSlow 2s ease-in-out infinite;
+    }
+    
+    /* Moving background dots */
+    .moving-bg {
+      position: relative;
+      overflow: hidden;
+    }
+    .moving-bg::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(circle, rgba(217, 119, 6, 0.1) 1px, transparent 1px);
+      background-size: 30px 30px;
+      animation: moveDots 20s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes moveDots {
+      from { background-position: 0 0; }
+      to { background-position: 60px 60px; }
+    }
+    
+    /* Rotating badge */
+    .rotating-badge {
+      transition: transform 0.3s ease;
+    }
+    .rotating-badge:hover {
+      transform: rotate(15deg) scale(1.1);
+    }
+  </style>
+</head>
+<body class="font-sans antialiased text-gray-800">
+
+  <!-- ========== NAVIGATION ========== -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-soft">
+    <div class="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex flex-wrap items-center justify-between">
+      <div class="flex items-center space-x-2 sm:space-x-3">
+        <i class="fas fa-dog text-2xl sm:text-3xl text-amber-700 floating-element"></i>
+        <span class="text-xl sm:text-2xl font-bold tracking-tight text-gray-800">Jaga<span class="text-amber-700"> | ජාගරණය</span></span>
+      </div>
+      <nav class="hidden md:flex space-x-6 lg:space-x-8 text-base lg:text-lg font-medium">
+        <a href="#home" class="hover:text-amber-700 transition">Home</a>
+        <a href="#mission" class="hover:text-amber-700 transition">Mission</a>
+        <a href="#technology" class="hover:text-amber-700 transition">Technology</a>
+        <a href="#app" class="hover:text-amber-700 transition">The App</a>
+        <a href="#team" class="hover:text-amber-700 transition">Team</a>
+        <a href="#competition" class="hover:text-amber-700 transition">Competition</a>
+      </nav>
+      <button id="mobile-menu-btn" class="md:hidden text-2xl focus:outline-none p-2 -mr-2" aria-label="Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-soft shadow-lg">
+      <div class="px-5 py-3 flex flex-col space-y-3 text-base font-medium">
+        <a href="#home" class="hover:text-amber-700 py-3 px-2 rounded-lg active:bg-amber-50 transition">🏠 Home</a>
+        <a href="#mission" class="hover:text-amber-700 py-3 px-2 rounded-lg active:bg-amber-50 transition">🎯 Mission</a>
+        <a href="#technology" class="hover:text-amber-700 py-3 px-2 rounded-lg active:bg-amber-50 transition">⚙️ Technology</a>
+        <a href="#app" class="hover:text-amber-700 py-3 px-2 rounded-lg active:bg-amber-50 transition">📱 The App</a>
+        <a href="#team" class="hover:text-amber-700 py-3 px-2 rounded-lg active:bg-amber-50 transition">👥 Team</a>
+        <a href="#competition" class="hover:text-amber-700 py-3 px-2 rounded-lg active:bg-amber-50 transition">🏆 Competition</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ========== HERO SECTION with Moving Elements ========== -->
+    <section id="home" class="hero-gradient py-12 sm:py-16 md:py-24 moving-bg">
+      <div class="container mx-auto px-4 sm:px-6 flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12">
+        <div class="flex-1 text-center md:text-left slide-left">
+          <div class="inline-block bg-amber-100 text-amber-800 rounded-full px-3 py-1 sm:px-4 sm:py-1 text-xs sm:text-sm font-semibold mb-3 sm:mb-4 bounce-slow">
+            <i class="fas fa-trophy mr-1"></i> WRO 2025 | Senior Category
+          </div>
+          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight text-gray-900">
+            <span class="text-amber-700">Jaga</span> —<br>
+            The Alert Guardian
+          </h1>
+          <p class="text-lg sm:text-xl md:text-2xl text-amber-600 font-semibold mt-2">ජාගරණය</p>
+          <p class="text-base sm:text-lg md:text-xl text-gray-600 mt-4 sm:mt-6 max-w-2xl mx-auto md:mx-0">
+            A robotic guide dog that embodies constant vigilance and protective awareness — guiding the visually impaired with intelligence and care.
+          </p>
+          <div class="mt-6 sm:mt-8 flex flex-wrap gap-3 sm:gap-4 justify-center md:justify-start">
+            <a href="#app" class="bg-gray-900 hover:bg-gray-800 text-white px-5 sm:px-7 py-2.5 sm:py-3 rounded-full font-semibold shadow-lg transition flex items-center gap-2 text-sm sm:text-base btn-touch"><i class="fas fa-mobile-alt"></i> Download App</a>
+            <a href="#technology" class="bg-white border border-gray-300 hover:border-amber-500 text-gray-800 px-5 sm:px-7 py-2.5 sm:py-3 rounded-full font-semibold shadow-sm transition flex items-center gap-2 text-sm sm:text-base btn-touch"><i class="fas fa-robot"></i> Explore Tech</a>
+          </div>
+        </div>
+        <div class="flex-1 flex justify-center slide-right">
+          <div class="relative w-full max-w-xs sm:max-w-sm md:max-w-md">
+            <div class="w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 bg-amber-200/40 rounded-full absolute -top-4 -left-4 blur-2xl pulse-glow"></div>
+            <div class="relative z-10 bg-white p-2 sm:p-3 rounded-2xl shadow-2xl floating-element">
+              <img src="https://placehold.co/800x600/2c3e2f/ffffff?text=Jaga+The+Guardian" alt="Jaga - Robotic guide dog" class="rounded-xl w-full h-auto object-cover shadow-md">
+            </div>
+            <!-- Rotating badge -->
+            <div class="absolute -bottom-4 -right-4 bg-amber-600 text-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg rotating-badge">
+              <i class="fas fa-eye text-2xl"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== NAME MEANING SECTION - Cultural Significance ========== -->
+    <section class="py-8 sm:py-12 bg-amber-50">
+      <div class="container mx-auto px-4 sm:px-6">
+        <div class="max-w-4xl mx-auto text-center">
+          <div class="inline-flex items-center gap-2 bg-amber-100 rounded-full px-4 py-2 mb-4">
+            <i class="fas fa-leaf text-amber-700"></i>
+            <span class="text-amber-800 font-medium text-sm">Rooted in Sri Lankan Culture</span>
+          </div>
+          <h3 class="text-2xl sm:text-3xl font-bold text-gray-800">The Meaning Behind <span class="text-amber-700">Jaga</span></h3>
+          <p class="text-gray-600 mt-4 text-base sm:text-lg leading-relaxed">
+            <span class="font-semibold text-amber-700">Jaga (ජාගරණය)</span> — derived from the Sinhala word "Jāgarana" — means <span class="font-semibold">alertness, vigilance, and wakefulness</span>. It embodies the essence of a guardian who never sleeps, constantly watchful and ready to respond. Just like a protector always keeping watch over those in their care, Jaga serves as an ever-vigilant companion for the visually impaired.
+          </p>
+          <div class="mt-4 text-amber-600 italic">"Always awake, always aware — the eternal guardian."</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== MISSION SECTION ========== -->
+    <section id="mission" class="py-12 sm:py-16 md:py-20 bg-white">
+      <div class="container mx-auto px-4 sm:px-6">
+        <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+          <i class="fas fa-bullseye text-3xl sm:text-4xl text-amber-600 mb-3 floating-element"></i>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">Our Mission</h2>
+          <div class="w-20 h-1 bg-amber-500 mx-auto mt-3 mb-4 sm:mt-4 sm:mb-6 rounded-full"></div>
+          <p class="text-base sm:text-lg text-gray-600 px-2">
+            To create Jaga — an affordable, culturally-rooted robotic guide dog that restores independence and mobility for the visually impaired community, powered entirely by a smartphone app for intuitive, modern control.
+          </p>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8">
+          <div class="bg-amber-50/40 p-5 sm:p-6 rounded-2xl border border-amber-100 text-center card-hover">
+            <div class="w-14 h-14 sm:w-16 sm:h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4"><i class="fas fa-eye text-xl sm:text-2xl text-amber-700"></i></div>
+            <h3 class="text-lg sm:text-xl font-bold">Constant Vigilance</h3>
+            <p class="text-gray-600 mt-2 text-sm sm:text-base">Like its name Jaga (ජාගරණය), our robot maintains 24/7 awareness, detecting obstacles and hazards in real-time.</p>
+          </div>
+          <div class="bg-amber-50/40 p-5 sm:p-6 rounded-2xl border border-amber-100 text-center card-hover">
+            <div class="w-14 h-14 sm:w-16 sm:h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4"><i class="fas fa-mobile-alt text-xl sm:text-2xl text-amber-700"></i></div>
+            <h3 class="text-lg sm:text-xl font-bold">App-Powered Control</h3>
+            <p class="text-gray-600 mt-2 text-sm sm:text-base">Voice commands, destination input, and real-time audio guidance through your smartphone — no physical feedback needed.</p>
+          </div>
+          <div class="bg-amber-50/40 p-5 sm:p-6 rounded-2xl border border-amber-100 text-center card-hover sm:col-span-2 lg:col-span-1">
+            <div class="w-14 h-14 sm:w-16 sm:h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4"><i class="fas fa-shield-alt text-xl sm:text-2xl text-amber-700"></i></div>
+            <h3 class="text-lg sm:text-xl font-bold">Protective Guardian</h3>
+            <p class="text-gray-600 mt-2 text-sm sm:text-base">Jaga embodies the spirit of a watchful protector — always alert, ready to respond, and dedicated to the safety of its user.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TECHNOLOGY SECTION ========== -->
+    <section id="technology" class="py-12 sm:py-16 md:py-20 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6">
+        <div class="text-center mb-10 sm:mb-14">
+          <i class="fas fa-cogs text-3xl sm:text-4xl text-amber-600 mb-3 slow-spin"></i>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">Cutting-Edge Technology</h2>
+          <p class="text-gray-500 max-w-2xl mx-auto mt-2 text-sm sm:text-base px-4">Powered by advanced sensors and seamless smartphone integration</p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-5 sm:gap-6 md:gap-8">
+          <div class="bg-white rounded-2xl shadow-md p-5 sm:p-6 w-full sm:w-72 md:w-80 border border-gray-100 card-hover">
+            <i class="fas fa-microchip text-2xl sm:text-3xl text-amber-600 mb-3"></i>
+            <h3 class="text-xl sm:text-2xl font-semibold">Ultra Sonic Sensors</h3>
+            <p class="text-gray-500 mt-2 text-sm sm:text-base">Dual ultra-sonic sensors provide 360° obstacle detection up to 15m, ensuring Jaga never misses a potential hazard.</p>
+          </div>
+          <div class="bg-white rounded-2xl shadow-md p-5 sm:p-6 w-full sm:w-72 md:w-80 border border-gray-100 card-hover">
+            <i class="fas fa-brain text-2xl sm:text-3xl text-amber-600 mb-3"></i>
+            <h3 class="text-xl sm:text-2xl font-semibold">Edge AI</h3>
+            <p class="text-gray-500 mt-2 text-sm sm:text-base">Real-time path planning and voice recognition for destination commands via app. Jaga thinks and responds instantly.</p>
+          </div>
+          <div class="bg-white rounded-2xl shadow-md p-5 sm:p-6 w-full sm:w-72 md:w-80 border border-gray-100 card-hover">
+            <i class="fas fa-bluetooth text-2xl sm:text-3xl text-amber-600 mb-3"></i>
+            <h3 class="text-xl sm:text-2xl font-semibold">App Connectivity</h3>
+            <p class="text-gray-500 mt-2 text-sm sm:text-base">Low-latency BLE 5.0 + 5G connectivity. The app sends destinations and receives real-time voice guidance updates.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== THE APP SECTION ========== -->
+    <section id="app" class="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-amber-50 to-white">
+      <div class="container mx-auto px-4 sm:px-6">
+        <div class="text-center mb-10 sm:mb-14">
+          <i class="fas fa-mobile-alt text-3xl sm:text-4xl text-amber-600 mb-3 bounce-slow"></i>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">The Jaga Companion App</h2>
+          <div class="w-20 h-1 bg-amber-500 mx-auto mt-3 mb-4 rounded-full"></div>
+          <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
+            Your complete control center — set destinations, receive voice guidance, and monitor your journey. No leash feedback needed. Just voice and sound.
+          </p>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
+          <!-- App Mockup -->
+          <div class="flex-1 flex justify-center floating-element">
+            <div class="app-screen-mockup rounded-[3rem] p-3 sm:p-4 bg-gradient-to-b from-gray-800 to-gray-900 shadow-2xl">
+              <div class="bg-white rounded-2xl overflow-hidden w-64 sm:w-72 md:w-80">
+                <div class="bg-amber-700 px-4 py-3 flex items-center justify-between">
+                  <i class="fas fa-dog text-white text-xl"></i>
+                  <span class="text-white font-semibold text-sm">Jaga | ජාගරණය</span>
+                  <i class="fas fa-battery-full text-white text-sm"></i>
+                </div>
+                <div class="p-4 space-y-4">
+                  <div class="bg-amber-50 rounded-xl p-3">
+                    <p class="text-xs text-gray-500 mb-1">Current Status</p>
+                    <div class="flex items-center justify-between">
+                      <span class="text-green-600 font-semibold text-sm"><i class="fas fa-circle text-xs mr-1"></i> Alert & Ready</span>
+                      <span class="text-xs text-gray-500">Battery 87%</span>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <p class="text-xs text-gray-500 mb-2">Set Destination</p>
+                    <div class="flex gap-2">
+                      <input type="text" placeholder="Say or type destination..." class="flex-1 border border-gray-300 rounded-full px-3 py-2 text-sm focus:outline-none focus:border-amber-500">
+                      <button class="bg-amber-600 text-white px-4 py-2 rounded-full text-sm font-semibold btn-touch"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                  </div>
+
+                  <div class="bg-gray-100 rounded-xl p-3">
+                    <p class="text-xs text-gray-500 mb-2">Voice Assistant</p>
+                    <div class="flex items-center justify-center gap-2">
+                      <button class="bg-amber-600 text-white px-5 py-2 rounded-full text-sm font-semibold flex items-center gap-2 btn-touch">
+                        <i class="fas fa-microphone"></i> Tap to Speak
+                      </button>
+                      <div class="voice-wave flex gap-1">
+                        <div class="w-1 h-3 bg-amber-500 rounded-full animate-pulse"></div>
+                        <div class="w-1 h-5 bg-amber-500 rounded-full animate-pulse delay-75"></div>
+                        <div class="w-1 h-4 bg-amber-500 rounded-full animate-pulse delay-150"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="bg-amber-50 rounded-xl p-3">
+                    <p class="text-xs text-gray-500 mb-1">Last Voice Guidance</p>
+                    <p class="text-sm text-gray-700 italic">"Proceed straight for 20 meters. Crosswalk ahead."</p>
+                    <div class="flex justify-end mt-2">
+                      <i class="fas fa-volume-up text-amber-600 text-sm"></i>
+                    </div>
+                  </div>
+
+                  <div class="flex gap-2">
+                    <button class="flex-1 bg-gray-800 text-white py-2 rounded-full text-sm font-semibold btn-touch"><i class="fas fa-home mr-1"></i> Home</button>
+                    <button class="flex-1 bg-red-600 text-white py-2 rounded-full text-sm font-semibold btn-touch"><i class="fas fa-stop-circle mr-1"></i> Emergency Stop</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- App Features -->
+          <div class="flex-1 space-y-5">
+            <div class="bg-white rounded-2xl p-5 shadow-md border-l-4 border-amber-500">
+              <div class="flex items-start gap-3">
+                <i class="fas fa-microphone-alt text-amber-600 text-2xl"></i>
+                <div>
+                  <h3 class="font-bold text-lg">Voice-Powered Commands</h3>
+                  <p class="text-gray-600 text-sm">Simply speak your destination or command — the app processes your voice and guides Jaga to navigate safely.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-white rounded-2xl p-5 shadow-md border-l-4 border-amber-500">
+              <div class="flex items-start gap-3">
+                <i class="fas fa-headphones-alt text-amber-600 text-2xl"></i>
+                <div>
+                  <h3 class="font-bold text-lg">Audio Guidance Only</h3>
+                  <p class="text-gray-600 text-sm">Clear, concise voice instructions delivered through your phone's speakers or connected headphones. No haptic feedback — just intuitive audio navigation.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-white rounded-2xl p-5 shadow-md border-l-4 border-amber-500">
+              <div class="flex items-start gap-3">
+                <i class="fas fa-map-marked-alt text-amber-600 text-2xl"></i>
+                <div>
+                  <h3 class="font-bold text-lg">Real-Time Journey Updates</h3>
+                  <p class="text-gray-600 text-sm">Live tracking of your route, obstacle alerts, and estimated arrival time — all displayed and announced through the app.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-amber-100 rounded-2xl p-4 text-center">
+              <p class="text-amber-800 font-semibold text-sm"><i class="fas fa-info-circle mr-1"></i> No leash haptics — everything is controlled through the app with voice and audio feedback.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TEAM SECTION - Updated Roles ========== -->
+    <section id="team" class="py-12 sm:py-16 md:py-20 bg-white">
+      <div class="container mx-auto px-4 sm:px-6">
+        <div class="text-center mb-10 sm:mb-14">
+          <i class="fas fa-users text-3xl sm:text-4xl text-amber-600 mb-3 floating-element"></i>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">Meet the Innovators</h2>
+          <p class="text-gray-500 max-w-2xl mx-auto mt-2 text-sm sm:text-base px-4">Driven by passion, engineering excellence, and social impact</p>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
+          <!-- Ometh Card - Hardware Specialist -->
+          <div class="bg-gray-50 rounded-2xl overflow-hidden shadow-md card-hover text-center transition">
+            <div class="team-img-placeholder h-48 sm:h-56 flex items-center justify-center">
+              <i class="fas fa-microchip text-5xl sm:text-7xl text-white/80"></i>
+            </div>
+            <div class="p-5 sm:p-6">
+              <h3 class="text-xl sm:text-2xl font-bold text-gray-800">Ometh</h3>
+              <p class="text-amber-600 font-medium text-sm sm:text-base">Hardware Specialist</p>
+              <p class="text-gray-500 text-xs sm:text-sm mt-3 sm:mt-4">Mechanical design, quadruped locomotion, and embedded systems. Ometh engineered Jaga's durable chassis and smooth gait patterns.</p>
+            </div>
+          </div>
+          <!-- Sineth Card - Sensor Integration -->
+          <div class="bg-gray-50 rounded-2xl overflow-hidden shadow-md card-hover text-center transition">
+            <div class="team-img-placeholder h-48 sm:h-56 flex items-center justify-center">
+              <i class="fas fa-radar text-5xl sm:text-7xl text-white/80"></i>
+            </div>
+            <div class="p-5 sm:p-6">
+              <h3 class="text-xl sm:text-2xl font-bold text-gray-800">Sineth</h3>
+              <p class="text-amber-600 font-medium text-sm sm:text-base">Sensor Integration</p>
+              <p class="text-gray-500 text-xs sm:text-sm mt-3 sm:mt-4">Ultra-sonic sensor fusion, obstacle detection algorithms, and real-time environmental mapping for Jaga's awareness.</p>
+            </div>
+          </div>
+          <!-- Nethika Card - Code Programmer -->
+          <div class="bg-gray-50 rounded-2xl overflow-hidden shadow-md card-hover text-center transition sm:col-span-2 lg:col-span-1">
+            <div class="team-img-placeholder h-48 sm:h-56 flex items-center justify-center">
+              <i class="fas fa-code text-5xl sm:text-7xl text-white/80"></i>
+            </div>
+            <div class="p-5 sm:p-6">
+              <h3 class="text-xl sm:text-2xl font-bold text-gray-800">Nethika</h3>
+              <p class="text-amber-600 font-medium text-sm sm:text-base">Code Programmer</p>
+              <p class="text-gray-500 text-xs sm:text-sm mt-3 sm:mt-4">Mobile app development, voice UI, navigation algorithms, and seamless Bluetooth integration for Jaga's companion app.</p>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-10 sm:mt-12 text-gray-500 italic text-sm sm:text-base">
+          <i class="fas fa-quote-left mr-2 text-amber-400"></i> United by innovation, we bring Jaga — the ever-watchful guardian — to life.
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== COMPETITION SECTION - WRO Senior Category ========== -->
+    <section id="competition" class="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-amber-50 to-white">
+      <div class="container mx-auto px-4 sm:px-6">
+        <div class="flex flex-col lg:flex-row gap-8 md:gap-12 items-stretch">
+          <div class="flex-1">
+            <div class="inline-block bg-amber-200 text-amber-800 rounded-full px-3 py-1 text-xs sm:text-sm font-semibold mb-3 sm:mb-4 bounce-slow">
+              <i class="fas fa-globe-asia mr-1"></i> World Robotics Competition 2025
+            </div>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">Competition Milestones</h2>
+            <p class="text-gray-600 text-base sm:text-lg mt-3 sm:mt-4 leading-relaxed">
+              We're competing in the <span class="font-semibold">World Robotics Competition (WRO) 2025</span> at <span class="font-semibold">Buhari Serendib School</span> in the <span class="font-semibold text-amber-700">Senior Category</span>. Jaga will be judged on innovation, technical execution, and social impact.
+            </p>
+            <ul class="mt-5 sm:mt-6 space-y-2 sm:space-y-3">
+              <li class="flex items-start gap-2 sm:gap-3"><i class="fas fa-check-circle text-amber-600 mt-1 text-sm sm:text-base"></i> <span class="text-sm sm:text-base"><strong>App-controlled navigation:</strong> Voice destination setting & real-time guidance</span></li>
+              <li class="flex items-start gap-2 sm:gap-3"><i class="fas fa-check-circle text-amber-600 mt-1 text-sm sm:text-base"></i> <span class="text-sm sm:text-base"><strong>Obstacle course:</strong> Dynamic avoidance using ultra-sonic sensors</span></li>
+              <li class="flex items-start gap-2 sm:gap-3"><i class="fas fa-check-circle text-amber-600 mt-1 text-sm sm:text-base"></i> <span class="text-sm sm:text-base"><strong>Guided navigation trial:</strong> User test through simulated urban environment using only app audio</span></li>
+              <li class="flex items-start gap-2 sm:gap-3"><i class="fas fa-check-circle text-amber-600 mt-1 text-sm sm:text-base"></i> <span class="text-sm sm:text-base"><strong>Cultural Innovation Award:</strong> Jaga's Sinhala name and cultural significance</span></li>
+            </ul>
+            <div class="mt-6 sm:mt-8 flex flex-wrap gap-3 sm:gap-4">
+              <div class="bg-white rounded-xl px-4 py-2 sm:px-5 sm:py-3 shadow-sm border">
+                <span class="text-xl sm:text-2xl font-bold text-amber-800">Senior Category</span>
+                <span class="ml-1 sm:ml-2 text-xs sm:text-sm text-gray-600">WRO 2025</span>
+              </div>
+              <div class="bg-white rounded-xl px-4 py-2 sm:px-5 sm:py-3 shadow-sm border">
+                <span class="text-xl sm:text-2xl font-bold text-amber-800">Buhari</span>
+                <span class="ml-1 sm:ml-2 text-xs sm:text-sm text-gray-600">Serendib School</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex-1 bg-white p-5 sm:p-6 rounded-2xl shadow-xl border border-amber-100">
+            <div class="flex items-center justify-between border-b pb-3 mb-4">
+              <h3 class="text-xl sm:text-2xl font-bold">Event Details</h3>
+              <i class="fas fa-calendar-alt text-amber-600 text-lg sm:text-xl"></i>
+            </div>
+            <div class="space-y-3 sm:space-y-4">
+              <div class="flex justify-between items-center flex-wrap gap-2">
+                <div class="flex items-center"><i class="fas fa-map-marker-alt w-5 sm:w-6 text-amber-600"></i> <span class="ml-2 text-sm sm:text-base font-medium">Venue</span></div>
+                <span class="bg-amber-100 text-amber-800 px-2 py-1 sm:px-3 rounded-full text-xs sm:text-sm">Buhari Serendib School</span>
+              </div>
+              <div class="flex justify-between items-center flex-wrap gap-2">
+                <div class="flex items-center"><i class="fas fa-chalkboard-user w-5 sm:w-6 text-amber-600"></i> <span class="ml-2 text-sm sm:text-base font-medium">Live Demo Day</span></div>
+                <span class="bg-amber-100 text-amber-800 px-2 py-1 sm:px-3 rounded-full text-xs sm:text-sm">May 12, 2025</span>
+              </div>
+              <div class="flex justify-between items-center flex-wrap gap-2">
+                <div class="flex items-center"><i class="fas fa-microphone-alt w-5 sm:w-6 text-amber-600"></i> <span class="ml-2 text-sm sm:text-base font-medium">Final Judging</span></div>
+                <span class="bg-amber-100 text-amber-800 px-2 py-1 sm:px-3 rounded-full text-xs sm:text-sm">June 2-4, 2025</span>
+              </div>
+              <div class="flex justify-between items-center flex-wrap gap-2">
+                <div class="flex items-center"><i class="fas fa-award w-5 sm:w-6 text-amber-600"></i> <span class="ml-2 text-sm sm:text-base font-medium">Awards Ceremony</span></div>
+                <span class="bg-amber-100 text-amber-800 px-2 py-1 sm:px-3 rounded-full text-xs sm:text-sm">June 10, 2025</span>
+              </div>
+            </div>
+            <div class="mt-6 sm:mt-8 bg-amber-50 rounded-xl p-4 text-center">
+              <p class="text-xs sm:text-sm text-gray-700">Jaga represents Sri Lankan innovation on the world stage. <br> Watch us at WRO 2025!</p>
+              <div class="mt-2 text-amber-700 font-semibold text-sm">ජාගරණය — Always awake, always aware.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="bg-gray-900 text-white pt-8 sm:pt-12 pb-4 sm:pb-6">
+      <div class="container mx-auto px-4 sm:px-6">
+        <div class="flex flex-col md:flex-row justify-between items-start gap-6 sm:gap-8 border-b border-gray-700 pb-6 sm:pb-8">
+          <div class="text-center md:text-left w-full md:w-auto">
+            <div class="flex items-center justify-center md:justify-start space-x-2 text-xl sm:text-2xl font-bold">
+              <i class="fas fa-dog text-amber-400 floating-element"></i>
+              <span>Jaga | <span class="text-amber-400">ජාගරණය</span></span>
+            </div>
+            <p class="text-gray-400 max-w-md mt-2 text-sm sm:text-base">The Alert Guardian — always awake, always aware.</p>
+          </div>
+          <div class="grid grid-cols-2 gap-6 sm:gap-8 w-full md:w-auto">
+            <div>
+              <h4 class="font-semibold text-base sm:text-lg">Explore</h4>
+              <ul class="mt-2 space-y-1 text-gray-400 text-sm sm:text-base">
+                <li><a href="#mission" class="hover:text-amber-400">Mission</a></li>
+                <li><a href="#technology" class="hover:text-amber-400">Technology</a></li>
+                <li><a href="#app" class="hover:text-amber-400">The App</a></li>
+                <li><a href="#team" class="hover:text-amber-400">Team</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold text-base sm:text-lg">Team Contact</h4>
+              <ul class="mt-2 space-y-1 text-gray-400 text-xs sm:text-sm break-all">
+                <li><i class="fas fa-envelope mr-2"></i> ometh@jaga.ai</li>
+                <li><i class="fas fa-envelope mr-2"></i> sineth@jaga.ai</li>
+                <li><i class="fas fa-envelope mr-2"></i> nethika@jaga.ai</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="text-center text-gray-500 text-xs sm:text-sm mt-5 sm:mt-6">
+          &copy; 2025 Jaga Robotics | World Robotics Competition 2025 - Senior Category | Ometh · Sineth · Nethika
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Mobile menu toggle script -->
+  <script>
+    (function() {
+      const menuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          mobileMenu.classList.toggle('hidden');
+        });
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+          });
+        });
+        document.addEventListener('click', function(event) {
+          if (!mobileMenu.classList.contains('hidden') && !menuBtn.contains(event.target) && !mobileMenu.contains(event.target)) {
+            mobileMenu.classList.add('hidden');
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
